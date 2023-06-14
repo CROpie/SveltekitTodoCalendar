@@ -4,12 +4,12 @@
 	export let isNewProject;
 </script>
 
-<div class="newProject">
+<div class="NewProject">
 	<button on:click={() => (isNewProject = true)}>New Project</button>
 </div>
 
 <style>
-	.newProject {
+	.NewProject {
 		border: 1px solid black;
 	}
 </style>

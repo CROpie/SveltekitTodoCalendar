@@ -1,12 +1,10 @@
 <script>
 	console.log('/ +layout.svelte');
-	import { page } from '$app/stores';
-	console.log($page);
 </script>
 
 <div class="header">
 	HEADER
-	<form action="logout?/logout" method="POST">
+	<form action="./logout?/logout" method="POST">
 		<button type="submit">Log Out</button>
 	</form>
 </div>

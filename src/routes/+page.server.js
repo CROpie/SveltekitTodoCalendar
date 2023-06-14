@@ -12,6 +12,8 @@ export const load = async ({ locals }) => {
 	const projectList = await db.Project.findMany({
 		where: { userID: parseInt(locals.user.id) }
 	});
-
-	return { userData: locals.user, projectList };
+	const todoList = await db.Todo.findMany({
+		where: { userID: parseInt(locals.user.id) }
+	});
+	return { userData: locals.user, projectList, todoList };
 };
