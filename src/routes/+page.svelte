@@ -2,6 +2,7 @@
 	console.log('/ +page.svelte');
 	import { afterUpdate } from 'svelte';
 
+    import ViewList from './components/ViewList.svelte';
 	import TimePeriodList from './components/TimePeriodList.svelte';
 	import ProjectList from './components/ProjectList.svelte';
 	import TodoView from './components/TodoView.svelte';
@@ -9,8 +10,10 @@
 
 	$: todoListData = data.todoList
 
+    let selectedView = 'List'
+    let selectedTimePeriod = 'All'
 	let selectedProjectID = -1;
-	let selectedTimePeriod = 'All'
+
 	let filteredTodoList = []
 
 	// Apply special strings and colours to certain dates, change the date format
@@ -148,11 +151,16 @@
 
 <div class="full-container">
 	<div class="side-panel">
+        <ViewList bind:selectedView />
 		<TimePeriodList bind:selectedTimePeriod />
 		<ProjectList bind:selectedProjectID />
 	</div>
 	<div class="view-container">
-		<TodoView { filteredTodoList }/>
+        {#if selectedView === 'List'}
+            <TodoView { filteredTodoList }/>
+        {:else if selectedView === 'Calendar'}
+            <p>calendar goes here</p>
+        {/if}
     </div>
 </div>
 

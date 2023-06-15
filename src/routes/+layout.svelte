@@ -1,12 +1,19 @@
 <script>
 	console.log('/ +layout.svelte');
+
+	import { page } from '$app/stores'
+
 </script>
 
 <div class="header">
-	HEADER
+	{#if $page.data.userData}
+	<p>Welcome,{$page.data.userData.name}!</p>
 	<form action="./logout?/logout" method="POST">
 		<button type="submit">Log Out</button>
 	</form>
+	{:else}
+	<p>Please log in to continue.</p>
+	{/if}
 </div>
 
 <div class="main">
@@ -22,6 +29,8 @@
 		box-sizing: border-box;
 	}
 	.header {
+		display: flex;
+		justify-content: space-between;
 		border: 2px solid black;
 		font-size: 1.5rem;
 	}
