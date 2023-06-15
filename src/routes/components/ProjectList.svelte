@@ -2,7 +2,6 @@
 	console.log('Component ProjectList');
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
-	import NewProject from './NewProject.svelte';
 
 	$: projectListData = $page.data.projectList;
 	$: userData = $page.data.userData
@@ -14,60 +13,125 @@
 	const closeNewProject = () => {
 		isNewProject = false;
 	}
+	
+	const clickNewProject = () => {
+        isNewProject = true;
+        window.addEventListener('mouseup', cancelInputProjectByClick);
+    }
+    function cancelInputProjectByClick(event) {
+        if (event.target != document.querySelector('.project-input-field')) {
+            window.removeEventListener('mouseup', cancelInputProjectByClick);
+            isNewProject= false
+        }
+    }
 
 </script>
 
 <div class="ProjectList">
 	<ul>
 		<li on:click={() => selectedProjectID = -1}>
-            <div class="project" class:selected={selectedProjectID === -1}>All</div>
+            <div class="list-item" class:selected={selectedProjectID === -1}>All</div>
         </li>
+
 		{#if projectListData}
         {#each projectListData as project (project.id)}
         <li on:click={() => selectedProjectID = project.id}>
-			<form class="project-container" method="POST" action="../api/project?/removeProjectFromDB" use:enhance>
-            	<div class="project" class:selected={selectedProjectID === project.id}>{project.projectName}</div>
+			<form class="form-container" method="POST" action="../api/project?/removeProjectFromDB" use:enhance>
+            	<div class="list-item" class:selected={selectedProjectID === project.id}>{project.projectName}</div>
 				<input name="projectID" type="hidden" value={project.id}>
-				<button type="submit">X</button>
+				<button class="del-button" type="submit">✘</button>
 			</form>
         </li>
         {/each}
 		{/if}
     
 		{#if isNewProject}
-		<li>
+		<li class="list-new-project-container">
 			<form method="POST" action="../api/project?/addProjectToDB" use:enhance={closeNewProject}>
-				<input name="projectName" type="text" />
+				<input class="project-input-field" name="projectName" type="text" />
 				<input name="userID" type="hidden" value={userData.id}>
 			</form>
 		</li>
 		{/if}
-		<li>
-	    	<NewProject bind:isNewProject />
+
+		<li class="list-new-project">
+	    	<div class="list-item">
+				<div class="new-project-button" on:click={clickNewProject}>New Project</div>
+			</div>
 		</li>
+
 	</ul>
 </div>
 
 <style>
 	.ProjectList {
-		border: 1px solid black;
-		cursor: pointer;
+		margin-top: 1rem;
+		padding: 0rem 1rem;
+		font-family: Arial;
 	}
 	ul {
 		list-style-type: none;
 		padding: 0;
 		margin: 0;
+
+	}
+	li {
+		cursor: pointer;
+		text-shadow: 2px 2px 2px black;
+		font-size: 1.5rem;
+		color: white;
+		border-radius: 1rem;
+		padding: 0rem 1rem;
 	}
 	li:hover {
         background-color: blueviolet;
     }
-	.project-container {
+	.form-container {
 		display: flex;
 		justify-content: space-between;
-
 	}
 	.selected {
 		color: orange;
-		font-weight: 800;
+	}
+
+	/* DELETE BUTTON */
+	.del-button {
+		border: none;
+		outline: none;
+        font-size: 1.5rem;
+        visibility: hidden;
+		background-color: transparent;
+		color: white;
+		text-shadow: 2px 2px 2px black;
+	}
+	.del-button:hover {
+		color: red;
+	}
+	li:hover .del-button,
+    .del-button:hover {
+    visibility: visible;
+	cursor: crosshair;
+    } 
+
+	/* NEW PROJECT */
+	.project-input-field {
+		outline: none;
+		border: none;
+		background-color: transparent;
+		color: white;
+		text-shadow: 2px 2px 2px black;
+		font-size: 1.5rem;
+		max-width: 100%;
+		box-shadow: 0 0 10px #9ecaed;
+	}
+	.list-new-project {
+		margin-bottom: 1rem;
+	}
+	.list-new-project-container:hover {
+		background-color: transparent;
+	}
+	.list-new-project {
+		margin-top: 2rem;
+		color: greenyellow;
 	}
 </style>

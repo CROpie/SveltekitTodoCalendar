@@ -3,10 +3,57 @@
 	export let form;
 </script>
 
-<h2>LOGIN</h2>
-<form action="?/login" method="POST" use:enhance>
-	<input name="username" type="text" placeholder="username" />
-	{#if form?.invalid}
-		<p>Please enter a name.</p>
-	{/if}
-</form>
+<div class="Login">
+	<h3>Please log in to continue.</h3>
+	<form action="?/login" method="POST" use:enhance>
+		<input name="username" type="text" placeholder="username" />
+		<input name="password" type="password" placeholder="password"/>
+		<button type="submit">Submit</button>
+		{#if form?.invalid}
+			<p class="error">Error: Please fill out all fields.</p>
+		{/if}
+		{#if form?.credentials}
+			<p class="error">Error: Please check your credentials.</p>
+		{/if}
+		<p class="message">*Enter default (no pass) to generate a default set of data..</p>
+	</form>
+
+</div>
+
+<style>
+	.Login {
+		background-color: white;
+		margin: 5rem auto;
+		width: 50%;
+		border: 3px solid lightblue;
+		padding: 2rem;
+		border-radius: 0.5rem;
+		font-family: Arial;
+	}
+	form {
+
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	input {
+		border-radius: 0.5rem;
+		padding-left: 1rem;
+	}
+	p {
+		text-align: center;
+	}
+	.message {
+		font-size: 0.75rem;
+	}
+	.error {
+		color: red;
+		font-size: 0.75rem;
+	}
+	button {
+		background-color: transparent;
+	}
+	button:hover {
+		background-color: lightblue;
+	}
+</style>

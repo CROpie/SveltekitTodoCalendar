@@ -169,8 +169,21 @@
 		display: grid;
 		grid-template-columns: 300px 1fr;
         border: 2px solid black;
+        height: 90vh;
 	}
 	.side-panel {
 		border: 2px solid black;
+
+        background-image: url($lib/images/3359732.jpg);
+		background-size: 100% 100%;
+		background-color: grey;
 	}
+    .view-container {
+        background-image: url($lib/images/3626461.jpg);
+        background-size: cover;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: 200px;
+		background-color: grey;
+    }
 </style>

@@ -5,30 +5,14 @@
     export let filteredTodoList
 
     let newTodoFlag = false;
+    let selectedTodo = -1;
 
 </script>
 
 <div class="TodoView">
-    {#if !newTodoFlag}
-    <ul>
-        <li>
-            <button class="todo" on:click={() => newTodoFlag = true}>New Todo</button>
-        </li>
-    </ul>
-    {:else}
-    <NewTodo bind:newTodoFlag/>
-    {/if}
 
-    <TodoList { filteredTodoList } bind:newTodoFlag/>
+    <NewTodo bind:newTodoFlag bind:selectedTodo/>
+
+    <TodoList { filteredTodoList } bind:newTodoFlag bind:selectedTodo/>
+
 </div>
-
-<style>
-    .TodoView {
-        border: 1px solid black;
-    }
-    ul {
-		list-style-type: none;
-		padding: 0;
-		margin: 0;
-	}
-</style>

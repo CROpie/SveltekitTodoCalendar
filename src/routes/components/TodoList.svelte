@@ -7,8 +7,8 @@
 
     export let filteredTodoList
     export let newTodoFlag
+    export let selectedTodo;
 
-    let selectedTodo;
     let editTodoFlag;
 
     const clickTodo = (todoID) => {
@@ -25,6 +25,7 @@
         editTodoFlag = -1;
     }
 
+
 </script>
 
 <div class="TodoList">
@@ -37,19 +38,20 @@
     {:else}
 
     <li>
-        <div class="todo-heading {todo.dateFlag}" on:click={() => clickTodo(todo.id)}>
-            <div>{todo.todoName}</div>
-            <div>{todo.prettyDate}</div>
-            <form class="delete-todo" method="POST" action="../api/todo?/removeTodoFromDB" use:enhance>
-                <button type="submit">X</button>
+        <div class="todo-header" class:selected={selectedTodo === todo.id} on:click={() => clickTodo(todo.id)}>
+            <div class="todo-name">{todo.todoName}</div>
+            <div class={todo.dateFlag}>{todo.prettyDate} </div>
+            <form method="POST" action="../api/todo?/removeTodoFromDB" use:enhance>
+                <button class="del-button" type="submit">✘</button>
+                <input type="hidden" name="todoID" value={todo.id}>
             </form>
         </div>
 
         {#if selectedTodo === todo.id}
         <div class="todo-data">
-            <div>{todo.notes}</div>
+            <div class="todo-notes">{todo.notes}</div>
             <input name="todoID" type="hidden" value={todo.id}>
-            <button type="submit" on:click={() => editTodoFlag = todo.id}>E</button>
+            <button class="edit-button" type="submit" on:click={() => editTodoFlag = todo.id}>E</button>
         </div>
         {/if}
     </li>
@@ -60,28 +62,56 @@
 </div>
 
 <style>
-	.TodoList {
-		border: 1px solid black;
+    .TodoList {
+        margin-top: 1rem;
+		padding: 0rem 1rem;
+        font-family: Arial;
 	}
 	ul {
 		list-style-type: none;
 		padding: 0;
 		margin: 0;
 	}
-    li {
-        border: 1px solid black;
-        margin-bottom: 0.5rem;
-    }
-	.todo-container {
-        border: 1px solid purple;
-		display: flex;
-		justify-content: space-between;
+	li {
+		cursor: pointer;
+		text-shadow: 2px 2px 2px black;
+		font-size: 1rem;
+		color: white;
+        margin-top: 1rem;
 	}
-    .todo-heading,
+    .todo-header {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background-color: rgba(211, 211, 211, 0.2);
+    }
+    .todo-header:hover {
+        background-color: blueviolet;
+    }
+    .todo-name {
+        flex: 1;
+        color: yellow;
+        font-size: 1.25rem;
+    }
     .todo-data {
+        background-color: rgba(79, 183, 192, 0.7);
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
     }
+    .todo-notes {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+    .selected {
+        background-color: blueviolet;
+    }
+
+    /* DUEDATE COLOURS */
     .today {
 		color: red;
 	}
@@ -94,4 +124,35 @@
 	.past {
 		color: grey
 	}
+
+    /* DELETE BUTTON EDIT BUTTON */
+	.del-button,
+    .edit-button {
+		border: none;
+		outline: none;
+        font-size: 1.5rem;
+        visibility: hidden;
+		background-color: transparent;
+		color: white;
+        padding: 0rem 1rem;
+        font-weight: 800;
+        text-shadow: 2px 2px 2px black;
+	}
+	.del-button:hover {
+		color: red;
+	}
+	li:hover .del-button,
+    .del-button:hover {
+    visibility: visible;
+	cursor: crosshair;
+    }
+
+	.edit-button:hover {
+		color: purple;
+	}
+    li:hover .edit-button,
+    .edit-button:hover {
+    visibility: visible;
+	cursor: crosshair;
+    }
 </style>

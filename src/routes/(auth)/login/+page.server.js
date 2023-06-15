@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
+import bcrypt from 'bcrypt';
 import { db } from '$lib/database';
 
 const login = async ({ cookies, request }) => {
@@ -23,9 +24,12 @@ const login = async ({ cookies, request }) => {
 		throw redirect(302, '/');
 	}
 
+	const password = data.get('password');
+
 	/* the normal path */
 	// server-side check for presence of a username
-	if (!username) {
+	if (!username || !password) {
+		console.log('invalid entry');
 		return fail(400, { invalid: true });
 	}
 
@@ -34,11 +38,20 @@ const login = async ({ cookies, request }) => {
 		where: { username }
 	});
 
+	// if exists, compare passwords
+	if (user) {
+		const userPassword = await bcrypt.compare(password, user.passwordHash);
+		if (!userPassword) {
+			console.log('fail password');
+			return fail(400, { credentials: true });
+		}
+	}
+
 	// if doesn't exist, create the user (ie register)
 	if (!user) {
 		console.log('Creating new user.');
 		user = await db.User.create({
-			data: { username, userAuthToken: username }
+			data: { username, passwordHash: await bcrypt.hash(password, 10), userAuthToken: username }
 		});
 	}
 
@@ -80,7 +93,7 @@ async function createDefaultData(username) {
 
 	// (re-)create the 'default' User, give a random userAuthToken to use as a cookie
 	let authUser = await db.User.create({
-		data: { username, userAuthToken: crypto.randomUUID() }
+		data: { username, userAuthToken: crypto.randomUUID(), passwordHash: 'fakepassword' }
 	});
 
 	// create the projects, return an array of the IDs to use in the todos

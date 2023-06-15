@@ -13,6 +13,7 @@ datasource db {
 model User {
   id        Int @id @default(autoincrement())
   username  String @unique
+  passwordHash String
   userAuthToken String @unique
   projects  Project[]
   todos     Todo[]

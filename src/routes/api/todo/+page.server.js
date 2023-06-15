@@ -26,7 +26,7 @@ export const actions = {
 		const data = await event.request.formData();
 		const todoID = parseInt(data.get('todoID'));
 		const result = await db.Todo.delete({
-			where: { id: parseInt(todoID) }
+			where: { id: todoID }
 		});
 		return result;
 	},
