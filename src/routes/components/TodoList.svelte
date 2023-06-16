@@ -65,7 +65,6 @@
     .TodoList {
         margin-top: 1rem;
 		padding: 0rem 1rem;
-        font-family: Arial;
 	}
 	ul {
 		list-style-type: none;

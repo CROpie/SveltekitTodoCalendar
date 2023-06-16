@@ -67,13 +67,11 @@
 	.ProjectList {
 		margin-top: 1rem;
 		padding: 0rem 1rem;
-		font-family: Arial;
 	}
 	ul {
-		list-style-type: none;
-		padding: 0;
-		margin: 0;
-
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 	}
 	li {
 		cursor: pointer;

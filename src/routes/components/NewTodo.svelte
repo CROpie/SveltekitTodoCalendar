@@ -64,7 +64,6 @@
     .NewTodo {
         margin-top: 1rem;
 		padding: 0rem 1rem;
-        font-family: Arial;
 	}
 	ul {
 		list-style-type: none;
@@ -91,7 +90,6 @@
         background-color: blueviolet;
     }
     .todo-name {
-        font-family: Arial;
         flex: 1;
         color: yellow;
         font-size: 1.25rem;

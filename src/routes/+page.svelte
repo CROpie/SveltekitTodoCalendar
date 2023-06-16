@@ -6,6 +6,7 @@
 	import TimePeriodList from './components/TimePeriodList.svelte';
 	import ProjectList from './components/ProjectList.svelte';
 	import TodoView from './components/TodoView.svelte';
+    import CalendarView from './components/CalendarView.svelte';
 	export let data;
 
 	$: todoListData = data.todoList
@@ -159,7 +160,7 @@
         {#if selectedView === 'List'}
             <TodoView { filteredTodoList }/>
         {:else if selectedView === 'Calendar'}
-            <p>calendar goes here</p>
+            <CalendarView { filteredTodoList } />
         {/if}
     </div>
 </div>

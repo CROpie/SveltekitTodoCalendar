@@ -26,7 +26,6 @@
     </li>
 <style>
 	li {
-        font-family: Arial;
         margin-top: 1rem;
 		cursor: pointer;
 		text-shadow: 2px 2px 2px black;
@@ -42,7 +41,6 @@
 		color: greenyellow;
     }
     .todo-name {
-        font-family: Arial;
         flex: 1;
         color: yellow;
         font-size: 1.25rem;
@@ -66,7 +64,6 @@
         flex: 1;
         margin-right: 1rem;
         padding: 0.25rem 0rem;
-        font-family: Arial;
     }
     .padding {
         visibility:hidden;

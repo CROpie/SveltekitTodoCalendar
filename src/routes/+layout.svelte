@@ -1,6 +1,8 @@
 <script>
 	console.log('/ +layout.svelte');
 
+ 	import '../app.css'
+
 	import { page } from '$app/stores'
 
 </script>
