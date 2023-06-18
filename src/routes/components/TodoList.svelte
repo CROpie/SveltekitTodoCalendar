@@ -3,13 +3,11 @@
     import EditTodo from './EditTodo.svelte';
 
 	import { enhance } from '$app/forms';
-	import { page } from '$app/stores';
 
     export let filteredTodoList
     export let newTodoFlag
     export let selectedTodo;
-
-    let editTodoFlag;
+    export let editTodoFlag;
 
     const clickTodo = (todoID) => {
         // clicking an open todo will close it
@@ -24,7 +22,9 @@
         // close edit if open
         editTodoFlag = -1;
     }
-
+    function stopProp() {
+        // do nothing, just want to use on:click|stopPropigation
+    }
 
 </script>
 
@@ -33,29 +33,30 @@
     {#if filteredTodoList}
     {#each filteredTodoList as todo (todo.id)}
 
-    {#if editTodoFlag === todo.id}
-        <EditTodo { todo } bind:editTodoFlag/>
-    {:else}
+        {#if editTodoFlag === todo.id}
+            <EditTodo { todo } bind:editTodoFlag />
+        {:else}
 
-    <li>
-        <div class="todo-header" class:selected={selectedTodo === todo.id} on:click={() => clickTodo(todo.id)}>
-            <div class="todo-name">{todo.todoName}</div>
-            <div class={todo.dateFlag}>{todo.prettyDate} </div>
-            <form method="POST" action="../api/todo?/removeTodoFromDB" use:enhance>
-                <button class="del-button" type="submit">✘</button>
-                <input type="hidden" name="todoID" value={todo.id}>
-            </form>
-        </div>
+            <li>
+                <div class="todo-header" class:selected={selectedTodo === todo.id} on:click={() => clickTodo(todo.id)} >
+                    <div class="todo-name">{todo.todoName}</div>
+                    <div class={todo.dateFlag}>{todo.prettyDate} </div>
+                    <form method="POST" action="../api/todo?/removeTodoFromDB" use:enhance>
+                        <button class="del-button" type="submit" on:click|stopPropagation={stopProp}>✘</button>
+                        <input type="hidden" name="todoID" value={todo.id}>
+                    </form>
+                </div>
 
-        {#if selectedTodo === todo.id}
-        <div class="todo-data">
-            <div class="todo-notes">{todo.notes}</div>
-            <input name="todoID" type="hidden" value={todo.id}>
-            <button class="edit-button" type="submit" on:click={() => editTodoFlag = todo.id}>E</button>
-        </div>
+                {#if selectedTodo === todo.id}
+                    <div class="todo-data">
+                        <div class="todo-notes">{todo.notes}</div>
+                        <input name="todoID" type="hidden" value={todo.id}>
+                        <button class="edit-button" type="submit" on:click={() => editTodoFlag = todo.id}>E</button>
+                    </div>
+                {/if}
+            </li>
         {/if}
-    </li>
-    {/if}
+        
     {/each}
     {/if}
     </ul>
@@ -86,7 +87,7 @@
         background-color: rgba(211, 211, 211, 0.2);
     }
     .todo-header:hover {
-        background-color: blueviolet;
+        background-color: rgba(138, 43, 226, 0.7);
     }
     .todo-name {
         flex: 1;
@@ -107,7 +108,7 @@
         white-space: pre-wrap;
     }
     .selected {
-        background-color: blueviolet;
+        background-color: rgba(138, 43, 226, 0.7);
     }
 
     /* DUEDATE COLOURS */

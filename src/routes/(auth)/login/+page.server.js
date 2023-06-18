@@ -140,6 +140,7 @@ async function addDefaultTodosToDB(authUser, projectIDList) {
 
 function createDynamicDates() {
 	const dynamicDates = [];
+	const intervalList = [-5, 3, 0, 1, 30, 0, 10, 0, 2, 4];
 
 	const today = new Date();
 	let todayObj = {
@@ -147,16 +148,9 @@ function createDynamicDates() {
 		month: today.getMonth(),
 		date: today.getDate()
 	};
-	dynamicDates[0] = dateObjToString(newDateFromInterval(todayObj, -5));
-	dynamicDates[1] = dateObjToString(newDateFromInterval(todayObj, 3));
-	dynamicDates[2] = dateObjToString(newDateFromInterval(todayObj, 0));
-	dynamicDates[3] = dateObjToString(newDateFromInterval(todayObj, 1));
-	dynamicDates[4] = dateObjToString(newDateFromInterval(todayObj, 30));
-	dynamicDates[5] = dateObjToString(newDateFromInterval(todayObj, 0));
-	dynamicDates[6] = dateObjToString(newDateFromInterval(todayObj, -10));
-	dynamicDates[7] = dateObjToString(newDateFromInterval(todayObj, 0));
-	dynamicDates[8] = dateObjToString(newDateFromInterval(todayObj, 2));
-	dynamicDates[9] = dateObjToString(newDateFromInterval(todayObj, 4));
+	for (let i = 0; i < 10; i++) {
+		dynamicDates[i] = dateObjToString(newDateFromInterval(todayObj, intervalList[i]));
+	}
 	return dynamicDates;
 }
 function newDateFromInterval(dateObj, interval) {

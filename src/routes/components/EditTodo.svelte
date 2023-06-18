@@ -5,12 +5,12 @@
     export let todo;
     export let editTodoFlag;
 
-    const resetEditFlag = () => {
+    const beforeSubmit = () => {
         editTodoFlag = -1
     }
 </script>
     <li>
-        <form method="POST" action="api/todo?/modifyTodoInDB" use:enhance={resetEditFlag}>
+        <form method="POST" action="api/todo?/modifyTodoInDB" use:enhance={beforeSubmit}>
         <div class="todo-header {todo.dateFlag}">
             <input class="todo-name todo-input-field" name="todoName" type="text" value={todo.todoName} required>
             <input class="todo-date todo-input-field" name="dueDate" type="date" value={todo.dueDate} required>
@@ -37,7 +37,7 @@
         display: flex;
         align-items: center;
         padding: 0.5rem 1rem;
-        background-color: blueviolet;
+        background-color: rgba(138, 43, 226, 0.7);
 		color: greenyellow;
     }
     .todo-name {

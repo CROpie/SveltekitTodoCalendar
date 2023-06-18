@@ -40,7 +40,7 @@
 		padding: 0rem 1rem;
 	}
     li:hover {
-        background-color: blueviolet;
+        background-color: rgba(138, 43, 226, 0.7);
     }
     .selected {
         color: orange;

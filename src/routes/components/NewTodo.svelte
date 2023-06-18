@@ -5,40 +5,40 @@
 
 	$: projectListData = $page.data.projectList;
 	$: userData = $page.data.userData
-    let notes;
 
     export let newTodoFlag
     export let selectedTodo
+    export let editTodoFlag
 
-    const beforeSubmit = ({cancel, formData}) => {
-		if (!notes) {
-			notes = "please fill out this field."
-			cancel()
-		} else {
-			notes = undefined;
+    const beforeSubmit = () => {
+        console.log('adding todo')
             newTodoFlag = false;
-			console.log('adding todo')
             selectedTodo = -1;
 		}
-	}
+
+    const clickNewTodo = () => {
+        newTodoFlag = true
+        selectedTodo = -1;
+        editTodoFlag = false;
+    }
 
 </script>
 
 <div class="NewTodo">
 
-    <ul>
+    <ul >
         {#if !newTodoFlag}
         <li>
-            <div class="todo-header" on:click={() => newTodoFlag = true}>New Todo</div>
+            <div class="todo-header" on:click={clickNewTodo}>New Todo</div>
         </li>
         {:else}
         
            
-        <li>
+        <li >
             <form method="POST" action="api/todo?/addTodoToDB" use:enhance={beforeSubmit}>
             
                 <div class="todo-header todo-header-input">
-                    <input class="todo-name todo-input-field" placeholder="Name" name="todoName" required/>
+                    <input class="todo-name todo-input-field" placeholder="Name" name="todoName" autocomplete="off" autofocus required/>
                     <input class="todo-date todo-input-field" type="date" name="dueDate" required>
                     <button class="submit-button" type="submit">✔</button>
                 </div>
@@ -84,10 +84,10 @@
 		color: greenyellow;
     }
     .todo-header-input {
-        background-color: blueviolet;
+        background-color: rgba(138, 43, 226, 0.7);
     }
     .todo-header:hover {
-        background-color: blueviolet;
+        background-color: rgba(138, 43, 226, 0.7);
     }
     .todo-name {
         flex: 1;
@@ -108,7 +108,6 @@
         margin-bottom: 1rem;
     }
     .todo-notes {
-        font-family: Arial;
         font-size: 1rem;
         color: white;
         flex: 1;

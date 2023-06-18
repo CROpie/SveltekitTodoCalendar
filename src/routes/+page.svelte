@@ -29,15 +29,13 @@
             year: today.getFullYear(),
             month: today.getMonth(),
             date: today.getDate(),
-
         }
-        let tomorrowObj = newDateFromInterval(todayObj, 1)
-        let dayAfterTomorrowObj = newDateFromInterval(todayObj, 2)
 
-        let todayString = dateObjToString(todayObj)
-        let tomorrowString = dateObjToString(tomorrowObj)
-        let dayAfterTomorrowString = dateObjToString(dayAfterTomorrowObj)
-        return { todayString, tomorrowString, dayAfterTomorrowString }
+        let todayFormatted = dateObjToFormattedDateString(todayObj)
+        let tomorrowFormatted = newDateFromInterval(todayObj, 1)
+        let dayAfterFormatted = newDateFromInterval(todayObj, 2)
+
+        return { todayFormatted, tomorrowFormatted, dayAfterFormatted }
     }
     function newDateFromInterval(dateObj, interval) {
         let newDateObj = structuredClone(dateObj)
@@ -49,13 +47,14 @@
             month: newDate.getMonth(),
             date: newDate.getDate(),
         }
-        return roundedNewDateObj
+        const formattedDate = dateObjToFormattedDateString(roundedNewDateObj)
+        return formattedDate
     }
-    function dateObjToString(dateObj) {
+    function dateObjToFormattedDateString(dateObj) {
         let month2dec = (parseInt(dateObj.month) + 1).toString().padStart(2, 0)
         let date2dec = (parseInt(dateObj.date)).toString().padStart(2, 0)
-        const dateString = `${dateObj.year}-${month2dec}-${date2dec}`
-        return dateString
+        const formattedDate = `${dateObj.year}-${month2dec}-${date2dec}`
+        return formattedDate
     }
     function prettifyDate() {
         // (colour comes from using todo.dateFlag as a class in Todo.svelte)
@@ -68,18 +67,17 @@
             return
         }
         const dateObjects = getDateObjects()
-
         filteredTodoList.forEach((todo) => {
-            if (todo.dueDate == dateObjects.todayString) {
+            if (todo.dueDate == dateObjects.todayFormatted) {
                 todo.prettyDate = "Today"
                 todo.dateFlag = "today"
-            } else if (todo.dueDate == dateObjects.tomorrowString) {
+            } else if (todo.dueDate == dateObjects.tomorrowFormatted) {
                 todo.prettyDate = "Tomorrow"
                 todo.dateFlag = "tomorrow"
-            } else if (todo.dueDate == dateObjects.dayAfterTomorrowString) {
+            } else if (todo.dueDate == dateObjects.dayAfterFormatted) {
                 todo.prettyDate = "Day After Tomorrow"
                 todo.dateFlag = "dayaftertomorrow"
-            } else if (todo.dueDate < dateObjects.todayString) {
+            } else if (todo.dueDate < dateObjects.todayFormatted) {
                 let date = new Date(todo.dueDate)
                 let dateString = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(date)
                 todo.prettyDate = dateString
@@ -100,12 +98,12 @@
             date: today.getDate(),
 
         }
-        const todayFormatted = dateObjToString(newDateFromInterval(todayObj, 0));
-        const oneWeekFormatted = dateObjToString(newDateFromInterval(todayObj, 7));
+        const todayFormatted = newDateFromInterval(todayObj, 0);
+        const oneWeekFormatted = newDateFromInterval(todayObj, 7);
 
         if (selectedTimePeriod === 'week') {
             filteredTodoList = filteredTodoList.filter((todo) => {
-                if (todo.dueDate < oneWeekFormatted && todo.dueDate >= todayFormatted) {
+                if (todo.dueDate >= todayFormatted && todo.dueDate < oneWeekFormatted) {
                     return true;
                 }
             });
@@ -138,16 +136,13 @@
         filteredTodoList = filteredTodoList.sort((a, b) =>
             a.dueDate > b.dueDate ? 1 : -1
         );
-    }
-
-	afterUpdate(() => {
+    }	
+    afterUpdate(() => {
 		console.log("** / +page.svelte afterUpdate **")
 		filterTodoList()
 		prettifyDate()
 		sortTodosByDate()
 	})
-
-
 </script>
 
 <div class="full-container">
@@ -168,23 +163,8 @@
 <style>
 	.full-container {
 		display: grid;
-		grid-template-columns: 300px 1fr;
-        border: 2px solid black;
-        height: 90vh;
-	}
-	.side-panel {
-		border: 2px solid black;
+		grid-template-columns: 250px 1fr;
 
-        background-image: url($lib/images/3359732.jpg);
-		background-size: 100% 100%;
-		background-color: grey;
 	}
-    .view-container {
-        background-image: url($lib/images/3626461.jpg);
-        background-size: cover;
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		background-position: 200px;
-		background-color: grey;
-    }
+
 </style>

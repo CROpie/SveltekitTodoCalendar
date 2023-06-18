@@ -9,7 +9,10 @@
 
 <div class="container">
 	<div class="header">
-		<div class="padding">.</div>
+
+		<div class="padding">
+			<img src="src/lib/images/BearbeerCrop.png">
+		</div>
 		{#if $page.data.userData}
 		<h2>Welcome, {$page.data.userData.name}!</h2>
 		<form action="./logout?/logout" method="POST">
@@ -32,24 +35,21 @@
 	}
 	.container {
 		font-family: Arial;
-		display: flex;
-		flex-direction: column;
 	}
 	.header {
+		height: 4rem;
 		background-color: black;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border: 2px solid black;
+		border: 2px solid white;
 		font-size: 1.5rem;
 	}
-	.main {
-		flex: 1;
-		border: 2px solid black;
-		background-color: grey;
-	}
 	.padding {
-		visibility: hidden;
+		margin-left: 2rem;
+	}
+	img {
+		height: 4rem;
 	}
 	h2 {
 		color: white;
@@ -63,6 +63,7 @@
 		border-radius: 0.5rem;
 		outline: none;
 		padding: 1rem;
+		margin-right: 2rem;
 	}
 	button:hover {
 		background-color: white;
@@ -71,5 +72,8 @@
 	button:active {
 		background-color: black;
 		color: white;
+	}
+	.main {
+		height: 100%;
 	}
 </style>

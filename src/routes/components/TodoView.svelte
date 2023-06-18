@@ -6,13 +6,14 @@
 
     let newTodoFlag = false;
     let selectedTodo = -1;
+    let editTodoFlag = false;
 
 </script>
 
 <div class="TodoView">
 
-    <NewTodo bind:newTodoFlag bind:selectedTodo/>
+    <NewTodo bind:newTodoFlag bind:selectedTodo bind:editTodoFlag/>
 
-    <TodoList { filteredTodoList } bind:newTodoFlag bind:selectedTodo/>
+    <TodoList { filteredTodoList } bind:newTodoFlag bind:selectedTodo bind:editTodoFlag/>
 
 </div>

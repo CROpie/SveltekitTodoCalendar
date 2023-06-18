@@ -2,6 +2,7 @@
 	console.log('Component ProjectList');
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
+	import { blur } from 'svelte/transition'
 
 	$: projectListData = $page.data.projectList;
 	$: userData = $page.data.userData
@@ -24,6 +25,14 @@
             isNewProject= false
         }
     }
+	// doesn't work for some reason, not selecting 'All' after a delete
+	const setAll = () => {
+		console.log('hello??', selectedProjectID)
+		if (selectedProjectID != -1) {
+			console.log('huh??', selectedProjectID)
+			selectedProjectID = -1
+		}
+	}
 
 </script>
 
@@ -35,11 +44,11 @@
 
 		{#if projectListData}
         {#each projectListData as project (project.id)}
-        <li on:click={() => selectedProjectID = project.id}>
+        <li on:click={() => selectedProjectID = project.id} out:blur>
 			<form class="form-container" method="POST" action="../api/project?/removeProjectFromDB" use:enhance>
             	<div class="list-item" class:selected={selectedProjectID === project.id}>{project.projectName}</div>
 				<input name="projectID" type="hidden" value={project.id}>
-				<button class="del-button" type="submit">✘</button>
+				<button class="del-button" type="submit" on:click={setAll}>✘</button>
 			</form>
         </li>
         {/each}
@@ -48,7 +57,7 @@
 		{#if isNewProject}
 		<li class="list-new-project-container">
 			<form method="POST" action="../api/project?/addProjectToDB" use:enhance={closeNewProject}>
-				<input class="project-input-field" name="projectName" type="text" />
+				<input class="project-input-field" name="projectName" type="text" autocomplete="off" autofocus required/>
 				<input name="userID" type="hidden" value={userData.id}>
 			</form>
 		</li>
@@ -82,7 +91,7 @@
 		padding: 0rem 1rem;
 	}
 	li:hover {
-        background-color: blueviolet;
+		background-color: rgba(138, 43, 226, 0.7);
     }
 	.form-container {
 		display: flex;
