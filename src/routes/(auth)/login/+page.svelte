@@ -4,7 +4,6 @@
 </script>
 <div class="Login">
 	<div class="login-box">
-		<h3>Please log in to continue.</h3>
 		<form action="?/login" method="POST" use:enhance>
 			<input name="username" type="text" placeholder="username" autocomplete="off"/>
 			<input name="password" type="password" placeholder="password"/>
@@ -27,39 +26,48 @@
 <style>
 	.login-box {
 		flex: auto;
-		background-color: white;
+
 		margin: 5rem auto;
 		width: 50%;
 		border: 3px solid lightblue;
 		padding: 2rem;
 		border-radius: 0.5rem;
-		font-family: Arial;
+
 	}
 	form {
+
+
 
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 	}
-	input {
+	input, button {
+		text-shadow: 2px 2px 2px black;
+		font-size: 1.5rem;
+		color: white;
+		background-color: transparent;
+		padding: 0.5rem;
+		border: 2px solid white;
 		border-radius: 0.5rem;
 		padding-left: 1rem;
+
+	}
+	input:hover, button:hover {
+		background-color: rgba(138, 43, 226, 0.7);
 	}
 	p {
 		text-align: center;
 	}
 	.message {
-		font-size: 0.75rem;
+		font-size: 1rem;
+		color: orange;
+		text-shadow: 2px 2px 2px black;
+		font-weight: 700;
 	}
 	.error {
 		color: red;
 		font-size: 0.75rem;
-	}
-	button {
-		background-color: transparent;
-	}
-	button:hover {
-		background-color: lightblue;
 	}
 	footer {
 		text-align: center;
