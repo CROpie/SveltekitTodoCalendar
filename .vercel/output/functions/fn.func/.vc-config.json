@@ -1,0 +1,6 @@
+{
+	"runtime": "nodejs18.x",
+	"handler": "home/chris/repos/SveltekitTodoCalendar/.svelte-kit/vercel-tmp/index.js",
+	"launcherType": "Nodejs",
+	"experimentalResponseStreaming": true
+}
