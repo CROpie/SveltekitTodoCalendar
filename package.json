@@ -28,8 +28,9 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^4.15.0",
+		"@supabase/supabase-js": "^2.25.0",
 		"@sveltejs/adapter-node": "^1.2.4",
-		"@sveltejs/kit": "next",
-		"@sveltejs/adapter-vercel": "^3.0.1"
+		"@sveltejs/adapter-vercel": "^3.0.1",
+		"@sveltejs/kit": "next"
 	}
 }
