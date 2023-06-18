@@ -31,6 +31,6 @@
 		"@supabase/supabase-js": "^2.25.0",
 		"@sveltejs/adapter-node": "^1.2.4",
 		"@sveltejs/adapter-vercel": "^3.0.1",
-		"@sveltejs/kit": "next"
+		"@sveltejs/kit": "^1.5.0"
 	}
 }
