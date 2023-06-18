@@ -58,11 +58,10 @@ function exec(match, params, matchers) {
   let buffered = 0;
   for (let i = 0; i < params.length; i += 1) {
     const param = params[i];
-    const value = values[i - buffered];
+    let value = values[i - buffered];
     if (param.chained && param.rest && buffered) {
-      result[param.name] = values.slice(i - buffered, i + 1).filter((s2) => s2).join("/");
+      value = values.slice(i - buffered, i + 1).filter((s2) => s2).join("/");
       buffered = 0;
-      continue;
     }
     if (value === void 0) {
       if (param.rest)
@@ -640,6 +639,7 @@ async function load_data({
 function create_universal_fetch(event, state, fetched, csr, resolve_opts) {
   return async (input, init2) => {
     const cloned_body = input instanceof Request && input.body ? input.clone().body : null;
+    const cloned_headers = input instanceof Request && [...input.headers].length ? new Headers(input.headers) : init2?.headers;
     let response = await event.fetch(input, init2);
     const url = new URL(input instanceof Request ? input.url : input, event.url);
     const same_origin = url.origin === event.url.origin;
@@ -684,7 +684,7 @@ function create_universal_fetch(event, state, fetched, csr, resolve_opts) {
                 /** @type {string | ArrayBufferView | undefined} */
                 input instanceof Request && cloned_body ? await stream_to_string(cloned_body) : init2?.body
               ),
-              request_headers: init2?.headers,
+              request_headers: cloned_headers,
               response_body: body,
               response: response2
             });
