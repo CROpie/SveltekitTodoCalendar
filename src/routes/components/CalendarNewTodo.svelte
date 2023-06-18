@@ -8,7 +8,7 @@
     export let clickedDate;
 
 </script>
-<form class='calendar-todo popup' method="POST" action="api/todo?/addTodoToDB" use:enhance>
+<form class='calendar-todo popup' method="POST" action="testapi/todo?/addTodoToDB" use:enhance>
         <div class="popuptext">
             <input class="todo-input-field name" name="todoName" placeholder="Name" autocomplete="off" autofocus required>
             <textarea class="todo-input-field notes" name="notes" placeholder="Notes"></textarea>

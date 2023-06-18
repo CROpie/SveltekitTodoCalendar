@@ -51,7 +51,7 @@ const ProjectList = create_ssr_component(($$result, $$props, $$bindings, slots) 
   return `<div class="ProjectList svelte-1uk5buv"><ul class="svelte-1uk5buv"><li class="svelte-1uk5buv"><div class="${["list-item svelte-1uk5buv", selectedProjectID === -1 ? "selected" : ""].join(" ").trim()}">All</div></li>
 
 		${projectListData ? `${each(projectListData, (project) => {
-    return `<li class="svelte-1uk5buv"><form class="form-container svelte-1uk5buv" method="POST" action="../api/project?/removeProjectFromDB"><div class="${[
+    return `<li class="svelte-1uk5buv"><form class="form-container svelte-1uk5buv" method="POST" action="../testapi/project?/removeProjectFromDB"><div class="${[
       "list-item svelte-1uk5buv",
       selectedProjectID === project.id ? "selected" : ""
     ].join(" ").trim()}">${escape(project.projectName)}</div>
@@ -89,7 +89,7 @@ const NewTodo = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   projectListData = $page.data.projectList;
   userData = $page.data.userData;
   $$unsubscribe_page();
-  return `<div class="NewTodo svelte-c4zf67"><ul class="svelte-c4zf67">${!newTodoFlag ? `<li class="svelte-c4zf67"><div class="todo-header svelte-c4zf67">New Todo</div></li>` : `<li class="svelte-c4zf67"><form method="POST" action="api/todo?/addTodoToDB"><div class="todo-header todo-header-input svelte-c4zf67"><input class="todo-name todo-input-field svelte-c4zf67" placeholder="Name" name="todoName" autocomplete="off" autofocus required>
+  return `<div class="NewTodo svelte-c4zf67"><ul class="svelte-c4zf67">${!newTodoFlag ? `<li class="svelte-c4zf67"><div class="todo-header svelte-c4zf67">New Todo</div></li>` : `<li class="svelte-c4zf67"><form method="POST" action="testapi/todo?/addTodoToDB"><div class="todo-header todo-header-input svelte-c4zf67"><input class="todo-name todo-input-field svelte-c4zf67" placeholder="Name" name="todoName" autocomplete="off" autofocus required>
                     <input class="todo-date todo-input-field svelte-c4zf67" type="date" name="dueDate" required>
                     <button class="submit-button svelte-c4zf67" type="submit">✔</button></div>
 
@@ -116,7 +116,7 @@ const EditTodo = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   if ($$props.editTodoFlag === void 0 && $$bindings.editTodoFlag && editTodoFlag !== void 0)
     $$bindings.editTodoFlag(editTodoFlag);
   $$result.css.add(css$4);
-  return `<li class="svelte-13z6ril"><form method="POST" action="api/todo?/modifyTodoInDB"><div class="${"todo-header " + escape(todo.dateFlag, true) + " svelte-13z6ril"}"><input class="todo-name todo-input-field svelte-13z6ril" name="todoName" type="text"${add_attribute("value", todo.todoName, 0)} required>
+  return `<li class="svelte-13z6ril"><form method="POST" action="testapi/todo?/modifyTodoInDB"><div class="${"todo-header " + escape(todo.dateFlag, true) + " svelte-13z6ril"}"><input class="todo-name todo-input-field svelte-13z6ril" name="todoName" type="text"${add_attribute("value", todo.todoName, 0)} required>
             <input class="todo-date todo-input-field svelte-13z6ril" name="dueDate" type="date"${add_attribute("value", todo.dueDate, 0)} required></div>
 
         <div class="todo-data svelte-13z6ril"><textarea class="todo-notes todo-input-field svelte-13z6ril" name="notes">${todo.notes || ""}</textarea>
@@ -165,7 +165,7 @@ const TodoList = create_ssr_component(($$result, $$props, $$bindings, slots) => 
         selectedTodo === todo.id ? "selected" : ""
       ].join(" ").trim()}"><div class="todo-name svelte-1318ojv">${escape(todo.todoName)}</div>
                     <div class="${escape(null_to_empty(todo.dateFlag), true) + " svelte-1318ojv"}">${escape(todo.prettyDate)}</div>
-                    <form method="POST" action="../api/todo?/removeTodoFromDB"><button class="del-button svelte-1318ojv" type="submit">✘</button>
+                    <form method="POST" action="../testapi/todo?/removeTodoFromDB"><button class="del-button svelte-1318ojv" type="submit">✘</button>
                         <input type="hidden" name="todoID"${add_attribute("value", todo.id, 0)}>
                     </form></div>
 
@@ -254,7 +254,7 @@ const CalendarNewTodo = create_ssr_component(($$result, $$props, $$bindings, slo
   projectListData = $page.data.projectList;
   userData = $page.data.userData;
   $$unsubscribe_page();
-  return `<form class="calendar-todo popup svelte-11n8i2c" method="POST" action="api/todo?/addTodoToDB"><div class="popuptext svelte-11n8i2c"><input class="todo-input-field name svelte-11n8i2c" name="todoName" placeholder="Name" autocomplete="off" autofocus required>
+  return `<form class="calendar-todo popup svelte-11n8i2c" method="POST" action="testapi/todo?/addTodoToDB"><div class="popuptext svelte-11n8i2c"><input class="todo-input-field name svelte-11n8i2c" name="todoName" placeholder="Name" autocomplete="off" autofocus required>
             <textarea class="todo-input-field notes svelte-11n8i2c" name="notes" placeholder="Notes"></textarea>
             <select class="project-dropdown svelte-11n8i2c" name="projectID" required>${each(projectListData, (project) => {
     return `<option class="dropdown-option svelte-11n8i2c"${add_attribute("value", project.id, 0)}>${escape(project.projectName)}</option>`;

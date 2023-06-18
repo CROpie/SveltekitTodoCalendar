@@ -3,7 +3,7 @@ import { db } from '$lib/database';
 
 export const actions = {
 	addProjectToDB: async (event) => {
-		console.log('** /api/project addProjectToDB +page.server.js **');
+		console.log('** /testapi/project addProjectToDB +page.server.js **');
 		const data = await event.request.formData();
 		const projectName = data.get('projectName');
 		const userID = parseInt(data.get('userID'));
@@ -14,7 +14,7 @@ export const actions = {
 		return result;
 	},
 	removeProjectFromDB: async (event) => {
-		console.log('** /api/project removeProjectFromDB +page.server.js **');
+		console.log('** /testapi/project removeProjectFromDB +page.server.js **');
 		const data = await event.request.formData();
 		const projectID = parseInt(data.get('projectID'));
 

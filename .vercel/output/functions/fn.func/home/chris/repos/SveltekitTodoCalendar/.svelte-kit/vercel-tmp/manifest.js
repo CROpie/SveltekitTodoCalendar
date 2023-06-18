@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.58e0b935.js","app":"_app/immutable/entry/app.a554870d.js","imports":["_app/immutable/entry/start.58e0b935.js","_app/immutable/chunks/index.28d0c909.js","_app/immutable/chunks/singletons.f6859509.js","_app/immutable/chunks/parse.bee59afc.js","_app/immutable/entry/app.a554870d.js","_app/immutable/chunks/index.28d0c909.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.3a940859.js","app":"_app/immutable/entry/app.abcf9038.js","imports":["_app/immutable/entry/start.3a940859.js","_app/immutable/chunks/index.28d0c909.js","_app/immutable/chunks/singletons.9602e370.js","_app/immutable/chunks/parse.bee59afc.js","_app/immutable/entry/app.abcf9038.js","_app/immutable/chunks/index.28d0c909.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -23,20 +23,6 @@ export const manifest = {
 				endpoint: null
 			},
 			{
-				id: "/api/project",
-				pattern: /^\/api\/project\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 5 },
-				endpoint: null
-			},
-			{
-				id: "/api/todo",
-				pattern: /^\/api\/todo\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 6 },
-				endpoint: null
-			},
-			{
 				id: "/(auth)/login",
 				pattern: /^\/login\/?$/,
 				params: [],
@@ -48,6 +34,20 @@ export const manifest = {
 				pattern: /^\/logout\/?$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 4 },
+				endpoint: null
+			},
+			{
+				id: "/testapi/project",
+				pattern: /^\/testapi\/project\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 5 },
+				endpoint: null
+			},
+			{
+				id: "/testapi/todo",
+				pattern: /^\/testapi\/todo\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: null
 			}
 		],

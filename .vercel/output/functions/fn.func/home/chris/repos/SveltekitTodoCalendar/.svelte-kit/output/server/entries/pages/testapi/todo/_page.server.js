@@ -1,7 +1,7 @@
 import { d as db } from "../../../../chunks/database.js";
 const actions = {
   addTodoToDB: async (event) => {
-    console.log("** /api/todo addTodoToDB +page.server.js **");
+    console.log("** /testapi/todo addTodoToDB +page.server.js **");
     const data = await event.request.formData();
     const todoName = data.get("todoName");
     const notes = data.get("notes");
@@ -20,7 +20,7 @@ const actions = {
     return result;
   },
   removeTodoFromDB: async (event) => {
-    console.log("** /api/todo removeTodoFromDB +page.server.js **");
+    console.log("** /testapi/todo removeTodoFromDB +page.server.js **");
     const data = await event.request.formData();
     const todoID = parseInt(data.get("todoID"));
     const result = await db.Todo.delete({
@@ -29,7 +29,7 @@ const actions = {
     return result;
   },
   modifyTodoInDB: async (event) => {
-    console.log("** /api/todo modifyTodoInDB +page.server.js **");
+    console.log("** /testapi/todo modifyTodoInDB +page.server.js **");
     const data = await event.request.formData();
     const todoName = data.get("todoName");
     const dueDate = data.get("dueDate");

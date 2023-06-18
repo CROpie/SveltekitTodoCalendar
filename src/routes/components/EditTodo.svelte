@@ -10,7 +10,7 @@
     }
 </script>
     <li>
-        <form method="POST" action="api/todo?/modifyTodoInDB" use:enhance={beforeSubmit}>
+        <form method="POST" action="testapi/todo?/modifyTodoInDB" use:enhance={beforeSubmit}>
         <div class="todo-header {todo.dateFlag}">
             <input class="todo-name todo-input-field" name="todoName" type="text" value={todo.todoName} required>
             <input class="todo-date todo-input-field" name="dueDate" type="date" value={todo.dueDate} required>

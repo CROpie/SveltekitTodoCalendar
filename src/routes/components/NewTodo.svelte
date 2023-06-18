@@ -35,7 +35,7 @@
         
            
         <li >
-            <form method="POST" action="api/todo?/addTodoToDB" use:enhance={beforeSubmit}>
+            <form method="POST" action="testapi/todo?/addTodoToDB" use:enhance={beforeSubmit}>
             
                 <div class="todo-header todo-header-input">
                     <input class="todo-name todo-input-field" placeholder="Name" name="todoName" autocomplete="off" autofocus required/>

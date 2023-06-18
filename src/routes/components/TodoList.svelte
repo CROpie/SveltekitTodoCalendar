@@ -41,7 +41,7 @@
                 <div class="todo-header" class:selected={selectedTodo === todo.id} on:click={() => clickTodo(todo.id)} >
                     <div class="todo-name">{todo.todoName}</div>
                     <div class={todo.dateFlag}>{todo.prettyDate} </div>
-                    <form method="POST" action="../api/todo?/removeTodoFromDB" use:enhance>
+                    <form method="POST" action="../testapi/todo?/removeTodoFromDB" use:enhance>
                         <button class="del-button" type="submit" on:click|stopPropagation={stopProp}>✘</button>
                         <input type="hidden" name="todoID" value={todo.id}>
                     </form>

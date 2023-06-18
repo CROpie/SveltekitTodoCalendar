@@ -45,7 +45,7 @@
 		{#if projectListData}
         {#each projectListData as project (project.id)}
         <li on:click={() => selectedProjectID = project.id} out:blur>
-			<form class="form-container" method="POST" action="../api/project?/removeProjectFromDB" use:enhance>
+			<form class="form-container" method="POST" action="../testapi/project?/removeProjectFromDB" use:enhance>
             	<div class="list-item" class:selected={selectedProjectID === project.id}>{project.projectName}</div>
 				<input name="projectID" type="hidden" value={project.id}>
 				<button class="del-button" type="submit" on:click={setAll}>✘</button>
@@ -56,7 +56,7 @@
     
 		{#if isNewProject}
 		<li class="list-new-project-container">
-			<form method="POST" action="../api/project?/addProjectToDB" use:enhance={closeNewProject}>
+			<form method="POST" action="../testapi/project?/addProjectToDB" use:enhance={closeNewProject}>
 				<input class="project-input-field" name="projectName" type="text" autocomplete="off" autofocus required/>
 				<input name="userID" type="hidden" value={userData.id}>
 			</form>
